@@ -7,7 +7,7 @@ export const Home = () => {
   return (
     <>
     <Slider/>
-    <Button sx={{marginTop:"90vh", marginLeft:"46vw",marginRight:"46vw", color:"black",border: 1.5, borderRadius:10}}>
+    <Button sx={{marginTop:"90vh", marginLeft:"46vw",marginRight:"45vw", color:"black",border: 1.5, borderRadius:10}}>
         Планирай
       </Button>
     </>
