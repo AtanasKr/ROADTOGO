@@ -5,16 +5,14 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import Logo from "../img/Main-Logo.png";
+import {Link} from 'react-router-dom';
 
-const pages = ['Начало', 'Дестинации', 'За нас', 'Съвети'];
 const settings = ['Профил','Излез'];
 let logged = false;
 
@@ -38,7 +36,6 @@ function Navbar() {
     <AppBar position="static" sx={{backgroundColor:"white"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/*add logo pic here*/}
           <Box
             component="img"
             sx={{
@@ -50,27 +47,58 @@ function Navbar() {
             src={Logo}
         />
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
               <Button
-                key={page}
+                key={"Начало"}
+                to={"/"}
+                component={Link}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'black', display: 'block' }}
               >
-                {page}
+                {"Начало"}
               </Button>
-            ))}
+              <Button
+                key={"Дестинации"}
+                to={"/Destinations"}
+                component={Link}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'black', display: 'block' }}
+              >
+                {"Дестинации"}
+              </Button>
+              <Button
+                key={"За нас"}
+                to={"/About"}
+                component={Link}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'black', display: 'block' }}
+              >
+                {"За нас"}
+              </Button>
+              <Button
+                key={"Съвети"}
+                to={"/Tips"}
+                component={Link}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'black', display: 'block' }}
+              >
+                {"Съвети"}
+              </Button>
           </Box>
 
           <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' }}}>
           <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'black', display: 'block' }}
+                component={Link}
+                to = {"/login"}
               >
                 Вход
               </Button>
             <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'black', display: 'block' }}
+                component={Link}
+                to = {"/register"}
               >
                 Регистрация
               </Button>
@@ -95,11 +123,12 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+              <MenuItem key={"Профил"} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">{"Профил"}</Typography>
                 </MenuItem>
-              ))}
+              <MenuItem key={"Излез"} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">{"Излез"}</Typography>
+                </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
