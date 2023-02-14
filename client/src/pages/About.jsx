@@ -4,8 +4,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
 const theme = createTheme();
 
 export default function About() {
@@ -15,7 +13,7 @@ export default function About() {
         <Box
           sx={{
             bgcolor: 'background.paper',
-            pt: 18,
+            pt: "4em",
             pb: 6,
           }}
         >

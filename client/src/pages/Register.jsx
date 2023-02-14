@@ -42,7 +42,7 @@ export default function Register() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 25,
+            marginTop: "3em",
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -110,13 +110,13 @@ export default function Register() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
-                  Забравена парола?
+              <Link href="#" variant="body2">
+                  <LinkTo to="/forgotten-password">Забравена парола?</LinkTo>
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
-                  {"Все още нямате акаунт? Регистрация"}
+                  <Link href="#" variant="body2">
+                  <LinkTo to="/login">Вече имате акаунт? Влезте</LinkTo>
                 </Link>
               </Grid>
             </Grid>
