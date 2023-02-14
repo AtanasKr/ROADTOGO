@@ -3,8 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -14,7 +12,6 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {Link as LinkTo} from 'react-router-dom';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import { border } from '@mui/system';
 
 function Copyright(props) {
   return (
@@ -45,7 +42,7 @@ export default function Login() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 25,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -94,12 +91,12 @@ export default function Login() {
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Забравена парола?
+                  <LinkTo to="/forgotten-password">Забравена парола?</LinkTo>
                 </Link>
               </Grid>
               <Grid item>
                 <Link href="#" variant="body2">
-                  {"Все още нямате акаунт? Регистрация"}
+                  <LinkTo to="/register">Все още нямате акаунт? Регистрация</LinkTo>
                 </Link>
               </Grid>
             </Grid>

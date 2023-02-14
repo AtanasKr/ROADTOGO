@@ -13,7 +13,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Logo from "../img/Main-Logo.png";
 import {Link} from 'react-router-dom';
 
-const settings = ['Профил','Излез'];
 let logged = false;
 
 function Navbar() {
