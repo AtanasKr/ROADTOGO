@@ -1,8 +1,7 @@
 import React from 'react'
 import Slider from '../components/Slider'
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { Box, Container } from '@mui/material';
+import { Box } from '@mui/material';
 export const Home = () => {
   return (
     <>
