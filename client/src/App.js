@@ -12,6 +12,8 @@ import Destinations from './pages/Destinations';
 import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import ForgottenPassSend from './pages/ForgottenPassSend';
+import PassReset from './pages/PassReset';
 
 const Layout = ()=>{
   return (
@@ -51,6 +53,12 @@ const router = createBrowserRouter([
   },{
     path: "/login",
     element: <Login/>,
+  },{
+    path: "/forgotten-password",
+    element: <ForgottenPassSend/>,
+  },{
+    path: "/password-reset",
+    element: <PassReset/>,
   }
 ]);
 
