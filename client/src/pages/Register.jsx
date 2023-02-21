@@ -10,8 +10,11 @@ import LandscapeIcon from '@mui/icons-material/Landscape';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {Link as LinkTo} from 'react-router-dom';
+import {Link as LinkTo, useNavigate} from 'react-router-dom';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import axios from 'axios'
+
+
 
 function Copyright(props) {
   return (
@@ -27,13 +30,26 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Register() {
-  const handleSubmit = (event) => {
+  const [err,setError] = React.useState(null);
+  const navigate = useNavigate();
+  const [inputs,setInputs] = React.useState({
+      username:"",
+      email:"",
+      password:"",
+    })
+
+  const handleChange = (event) =>{
+      setInputs(prev=>({...prev,[event.target.name]:event.target.value}))
+    }
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    try{
+      await axios.post("/auth/register",inputs)
+      console.log(inputs)
+      navigate("/login");
+    }catch(err){
+      setError(err.response.data);
+    }
   };
 
   return (
@@ -54,8 +70,9 @@ export default function Register() {
           <Typography component="h1" variant="h5">
             Регистрация
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" noValidate sx={{ mt: 1 }}>
             <TextField
+              onChange={handleChange}
               margin="normal"
               required
               fullWidth
@@ -66,16 +83,18 @@ export default function Register() {
               autoFocus
             />
             <TextField
+              onChange={handleChange}
               margin="normal"
               required
               fullWidth
-              id="name"
+              id="username"
               label="Име"
-              name="name"
+              name="username"
               autoComplete="name"
               autoFocus
             />
             <TextField
+              onChange={handleChange}
               margin="normal"
               required
               fullWidth
@@ -92,13 +111,14 @@ export default function Register() {
               name="password2"
               label="Повторете парола"
               type="password"
-              id="password"
+              id="password2"
               autoComplete="current-password"
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
+              onClick={handleSubmit}
               style={{ border: '2px solid' }}
               sx={{ mt: 3, mb: 2, bgcolor: 'white', color: "Black", '&:hover': {
                 backgroundColor: 'lightgrey',
@@ -106,7 +126,7 @@ export default function Register() {
               },}}
               
             >
-              Влез
+              Регистрация
             </Button>
             <Grid container>
               <Grid item xs>
