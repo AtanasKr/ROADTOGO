@@ -36,6 +36,7 @@ export default function Register() {
       username:"",
       email:"",
       password:"",
+      password2:""
     })
 
   const handleChange = (event) =>{
@@ -105,6 +106,7 @@ export default function Register() {
               autoComplete="current-password"
             />
             <TextField
+              onChange={handleChange}
               margin="normal"
               required
               fullWidth
@@ -152,6 +154,7 @@ export default function Register() {
             >
               Начало
             </Button>
+            {err&&<Typography sx={{color:"red"}}>{err}</Typography>}
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
