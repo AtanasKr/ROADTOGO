@@ -3,25 +3,26 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
+// import Typography from '@mui/material/Typography';
+// import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
+// import MenuItem from '@mui/material/MenuItem';
 import Logo from "../img/Main-Logo.png";
 import {Link} from 'react-router-dom';
-
-let logged = false;
+import { useContext } from 'react'
+import { AuthContext } from '../context/authContext'
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const {currentUser, logout} = useContext(AuthContext);
 
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+  // const handleOpenUserMenu = (event) => {
+  //   setAnchorElUser(event.currentTarget);
+  // };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
@@ -30,6 +31,12 @@ function Navbar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleLogOut = (e) =>{
+    e.preventDefault();
+    logout();
+    window.location.reload()
+  }
 
   return (
     <AppBar position="static" sx={{backgroundColor:"white"}}>
@@ -85,28 +92,38 @@ function Navbar() {
           </Box>
 
           <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' }}}>
-          <Button
+          {!currentUser&&<Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'black', display: 'block' }}
                 component={Link}
                 to = {"/login"}
               >
                 Вход
-              </Button>
-            <Button
+              </Button>}
+            {!currentUser&&<Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'black', display: 'block' }}
                 component={Link}
                 to = {"/register"}
               >
                 Регистрация
-              </Button>
-          {logged&& <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              </Button>}
+          {currentUser&& <Tooltip title="Към профил">
+              <IconButton  sx={{ p: 0, mr:2 }}>
+                <Avatar alt="Remy Sharp" src="" />
               </IconButton>
-            </Tooltip>}
-            <Menu
+            </Tooltip>
+            }
+            {currentUser&&<Button
+                sx={{ my: 2, color: 'black', display: 'block' }}
+                component={Link}
+                to = {"/register"}
+                onClick={handleLogOut}
+                // onClick={handleOpenUserMenu}
+              >
+                Излез
+              </Button>}
+            {/* <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
@@ -128,7 +145,7 @@ function Navbar() {
               <MenuItem key={"Излез"} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{"Излез"}</Typography>
                 </MenuItem>
-            </Menu>
+            </Menu> */}
           </Box>
         </Toolbar>
       </Container>

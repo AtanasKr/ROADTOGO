@@ -12,6 +12,10 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {Link as LinkTo} from 'react-router-dom';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../context/authContext'
+import { useContext } from 'react'
 
 function Copyright(props) {
   return (
@@ -27,14 +31,31 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Login() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+
+  const [inputs,setInputs] = useState({
+    email:"",
+    password:"",
+  })
+
+  const [err,setError] =useState(null);
+  const navigate = useNavigate();
+  const {login} = useContext(AuthContext)
+
+
+  const handleSubmit = async e =>{
+    e.preventDefault();
+    try{
+      await login(inputs);
+      navigate("/");
+    }catch(err){
+      console.log(err)
+      setError(err);
+    }
+  }
+
+  const handleChange = e =>{
+    setInputs(prev=>({...prev,[e.target.name]:e.target.value}))
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -64,6 +85,7 @@ export default function Login() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={handleChange}
             />
             <TextField
               margin="normal"
@@ -74,12 +96,14 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handleChange}
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
               style={{ border: '2px solid' }}
+              onClick={handleSubmit}
               sx={{ mt: 3, mb: 2, bgcolor: 'white', color: "Black", '&:hover': {
                 backgroundColor: 'lightgrey',
                 boxShadow: 'none',

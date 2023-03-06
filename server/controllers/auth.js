@@ -16,13 +16,11 @@ export const register = (req,res) =>{
         db.query(q,[req.body.email,req.body.username], (err,data)=>{
             if(err) return res.json(err)
             if(data.length) return res.status(409).json("Вече съществува акаунт с дадения имейл!");
-            console.log(req.body.email)
 
             //hashing the password
 
             const salt = bcrypt.genSaltSync(10);
             const hash = bcrypt.hashSync(req.body.password,salt)
-            console.log(hash)
 
             const q = "INSERT INTO users(`username`,`email`,`password`) VALUES (?)"
             const values = [req.body.username,req.body.email,hash]
@@ -37,13 +35,11 @@ export const register = (req,res) =>{
 
 export const logIn = (req,res) =>{
     //check if user exists
-    const q = "SELECT * FROM users WHERE username = ?"
-
-    db.query(q,[req.body.username], (err,data)=>{
+    const q = "SELECT * FROM users WHERE email = ?"
+    db.query(q,[req.body.email], (err,data)=>{
         if(err) return res.json(err)
         //check if user is found
         if(data.length===0) return res.status(404).json("User not found!")
-
         //check user password
         const isPasswordCorrect = bcrypt.compareSync(req.body.password,data[0].password)
 
