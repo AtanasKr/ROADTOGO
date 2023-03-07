@@ -49,7 +49,7 @@ export default function Login() {
       navigate("/");
     }catch(err){
       console.log(err)
-      setError(err);
+      setError(err.response.data);
     }
   }
 
@@ -136,6 +136,7 @@ export default function Login() {
             >
               Начало
             </Button>
+            {err&&<Typography sx={{color:"red"}}>{err}</Typography>}
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>

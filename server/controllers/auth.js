@@ -39,11 +39,11 @@ export const logIn = (req,res) =>{
     db.query(q,[req.body.email], (err,data)=>{
         if(err) return res.json(err)
         //check if user is found
-        if(data.length===0) return res.status(404).json("User not found!")
+        if(data.length===0) return res.status(404).json("Не е намерен такъв потребител!")
         //check user password
         const isPasswordCorrect = bcrypt.compareSync(req.body.password,data[0].password)
 
-        if(!isPasswordCorrect) return res.status(400).json("Wrong username or password")
+        if(!isPasswordCorrect) return res.status(400).json("Грешна парла!")
         const token = jwt.sign({id:data[0].id},"jwtkey");
         //deconstruct password from the user data
         const {password, ...other} = data[0];

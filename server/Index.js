@@ -2,6 +2,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import multer from "multer";
 import authRoutes from "./routes/auth.js";
+import locationRoutes from "./routes/locations.js";
 import cors from 'cors'
 
 const app = express();
@@ -26,6 +27,7 @@ const storage = multer.diskStorage({
   });
 
   app.use("/server/auth",authRoutes)
+  app.use("/server/locations",locationRoutes)
 
   app.listen(8800, () => {
     console.log("Connected!");

@@ -7,12 +7,31 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import bg1 from '../img/bg1.png'
+import bg1 from '../storage/Aheloi.jpg'
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
+import { useEffect, useState } from 'react';
+import {Link, useLocation} from 'react-router-dom'
+import axios from 'axios';
 
-let data = {};
+let data2 = [{
+  id: 0,
+  name: "Cobol",
+  category:"Programming"
+},
+{
+  id: 1,
+  name: "JavaScript",
+  category:"Programming"
+},];
+
+export default function Destination() {
+  const [searchTerm, setSearchTerm] = useState("");
+
 const handleOnSearch = (string, results) => {
   console.log(string, results);
+  setSearchTerm(string)
+  console.log(bg1)
+  // window.location = `/products/${string}`;
 };
 
 const handleOnHover = (result) => {
@@ -20,7 +39,9 @@ const handleOnHover = (result) => {
 };
 
 const handleOnSelect = (item) => {
-  window.location = `/products/${item.id}`;
+  // window.location = `/location/${item.id}`;
+  setSearchTerm(item.name)
+  console.log("../storage/"+item.pic)
 };
 
 const handleOnFocus = () => {
@@ -31,7 +52,22 @@ const handleOnClear = () => {
   console.log("Cleared");
 };
 
-export default function Destination() {
+  const [data,setData] = useState([])
+  const cat = useLocation().search;
+  console.log("The cat is:"+cat)
+
+  useEffect(()=>{
+    const fetchData = async()=>{
+      try{
+        const res = await axios.get(`/locations${cat}`)
+        setData(res.data)
+        console.log(res.data)
+      }catch(err){
+        console.log(err)
+      }
+    }
+    fetchData();
+  },[cat])
   return (
     <>
     <div className="search-bar" style={{marginTop:"2em", marginRight:"20em",marginLeft:"20em"}}>
@@ -44,7 +80,7 @@ export default function Destination() {
                 onFocus={handleOnFocus}
                 placeholder="Намерете локация"
                 onClear={handleOnClear}
-                fuseOptions={{ keys: ["name", "description"] }} // Search in the description text as well
+                fuseOptions={{ keys: ["name", "desc"] }} // Search in the description text and category text as well
                 styling={{
                   zIndex: 100,
                   borderRadius: "5px",
@@ -59,132 +95,37 @@ export default function Destination() {
             </div>
       <Box sx={{ flexGrow: 1, marginTop:"6em", marginLeft:"22vw", marginRight:"22vw"}}>
         <Grid container spacing={2} >
-          <Grid item xs={4}>
-            <Card sx={{ maxWidth: 345, paddingLeft:"0" }}>
-              <CardMedia
-                sx={{ height: 140}}
-                image={bg1}
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Lizard
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Lizards are a widespread group of squamate reptiles, with over 6,000
-                  species, ranging across all continents except Antarctica
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">Share</Button>
-                <Button size="small">Learn More</Button>
-              </CardActions>
-            </Card>
-          </Grid>
-          <Grid item xs={4}>
-          <Card sx={{ maxWidth: 345 }}>
-              <CardMedia
-                sx={{ height: 140 }}
-                image={bg1}
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Lizard
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Lizards are a widespread group of squamate reptiles, with over 6,000
-                  species, ranging across all continents except Antarctica
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">Share</Button>
-                <Button size="small">Learn More</Button>
-              </CardActions>
-            </Card>
-          </Grid>
-          <Grid item xs={4}>
-          <Card sx={{ maxWidth: 345 }}>
-              <CardMedia
-                sx={{ height: 140 }}
-                image={bg1}
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Lizard
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Lizards are a widespread group of squamate reptiles, with over 6,000
-                  species, ranging across all continents except Antarctica
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">Share</Button>
-                <Button size="small">Learn More</Button>
-              </CardActions>
-            </Card>
-          </Grid>
-          <Grid item xs={4}>
-          <Card sx={{ maxWidth: 345 }}>
-              <CardMedia
-                sx={{ height: 140 }}
-                image={bg1}
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Lizard
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Lizards are a widespread group of squamate reptiles, with over 6,000
-                  species, ranging across all continents except Antarctica
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">Share</Button>
-                <Button size="small">Learn More</Button>
-              </CardActions>
-            </Card>
-          </Grid>
-          <Grid item xs={4}>
-          <Card sx={{ maxWidth: 345 }}>
-              <CardMedia
-                sx={{ height: 140 }}
-                image={bg1}
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Lizard
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Lizards are a widespread group of squamate reptiles, with over 6,000
-                  species, ranging across all continents except Antarctica
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">Share</Button>
-                <Button size="small">Learn More</Button>
-              </CardActions>
-            </Card>
-          </Grid>
-          <Grid item xs={4}>
-          <Card sx={{ maxWidth: 345 }}>
-              <CardMedia
-                sx={{ height: 140 }}
-                image={bg1}
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Lizard
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Lizards are a widespread group of squamate reptiles, with over 6,000
-                  species, ranging across all continents except Antarctica
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">Share</Button>
-                <Button size="small">Learn More</Button>
-              </CardActions>
-            </Card>
-          </Grid>
+          {data.filter((val) =>{
+            if(searchTerm==""){
+              return val;
+            }else if(val.name.toLowerCase().includes(searchTerm.toLowerCase())){
+              return val;
+            }
+          })
+          .map((val)=>{
+            return(
+              <Grid item xs={4}>
+              <Card sx={{ maxWidth: 345, paddingLeft:"0" }}>
+                <CardMedia
+                  sx={{ height: 140}}
+                  image={require ("../storage/"+val.pic)}
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                    {val.name}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {val.desc.substring(0,100)+"..."}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small">Запази</Button>
+                  <Button size="small">Информация</Button>
+                </CardActions>
+              </Card>
+            </Grid>
+            )
+          })}
         </Grid>
       </Box>
     </>
