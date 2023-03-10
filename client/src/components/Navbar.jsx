@@ -109,7 +109,7 @@ function Navbar() {
                 Регистрация
               </Button>}
           {currentUser&& <Tooltip title="Към профил">
-              <IconButton  sx={{ p: 0, mr:2 }}>
+              <IconButton  sx={{ p: 0, mr:2 }} component={Link} to = {"/profile"}>
                 <Avatar alt="Remy Sharp" src="" />
               </IconButton>
             </Tooltip>

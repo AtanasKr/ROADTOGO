@@ -22,8 +22,8 @@ export const register = (req,res) =>{
             const salt = bcrypt.genSaltSync(10);
             const hash = bcrypt.hashSync(req.body.password,salt)
 
-            const q = "INSERT INTO users(`username`,`email`,`password`) VALUES (?)"
-            const values = [req.body.username,req.body.email,hash]
+            const q = "INSERT INTO users(`username`,`email`,`password`,`joindate`) VALUES (?)"
+            const values = [req.body.username,req.body.email,hash,req.body.date]
             db.query(q,[values],(err,data)=>{
                 if(err) return res.json(err)
                 return res.status(200).json("User has been created!")
@@ -43,7 +43,7 @@ export const logIn = (req,res) =>{
         //check user password
         const isPasswordCorrect = bcrypt.compareSync(req.body.password,data[0].password)
 
-        if(!isPasswordCorrect) return res.status(400).json("Грешна парла!")
+        if(!isPasswordCorrect) return res.status(400).json("Грешна парoла!")
         const token = jwt.sign({id:data[0].id},"jwtkey");
         //deconstruct password from the user data
         const {password, ...other} = data[0];

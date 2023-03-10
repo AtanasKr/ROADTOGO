@@ -14,6 +14,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import ForgottenPassSend from './pages/ForgottenPassSend';
 import PassReset from './pages/PassReset';
+import { UserProfile } from "./pages/UserProfile";
 
 const Layout = ()=>{
   return (
@@ -59,6 +60,9 @@ const router = createBrowserRouter([
   },{
     path: "/password-reset",
     element: <PassReset/>,
+  },{
+    path: "/profile",
+    element: <UserProfile/>,
   }
 ]);
 

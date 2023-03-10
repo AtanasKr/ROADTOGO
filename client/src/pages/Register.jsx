@@ -45,10 +45,13 @@ export default function Register() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try{
+      let timeElapsed = Date.now();
+      inputs.date = new Date(timeElapsed).toLocaleDateString();
       await axios.post("/auth/register",inputs)
       console.log(inputs)
       navigate("/login");
     }catch(err){
+      console.log(err)
       setError(err.response.data);
     }
   };
