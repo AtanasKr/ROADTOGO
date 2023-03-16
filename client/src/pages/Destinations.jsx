@@ -13,17 +13,6 @@ import { useEffect, useState } from 'react';
 import {Link, useLocation} from 'react-router-dom'
 import axios from 'axios';
 
-let data2 = [{
-  id: 0,
-  name: "Cobol",
-  category:"Programming"
-},
-{
-  id: 1,
-  name: "JavaScript",
-  category:"Programming"
-},];
-
 export default function Destination() {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -120,7 +109,7 @@ const handleOnClear = () => {
                 </CardContent>
                 <CardActions>
                   <Button size="small">Запази</Button>
-                  <Button size="small">Информация</Button>
+                  <Button size="small" component={Link} to ={"/destinations/"+val.id}>Информация</Button>
                 </CardActions>
               </Card>
             </Grid>

@@ -15,6 +15,7 @@ import Login from './pages/Login';
 import ForgottenPassSend from './pages/ForgottenPassSend';
 import PassReset from './pages/PassReset';
 import { UserProfile } from "./pages/UserProfile";
+import { SingleLocation } from "./pages/SingleLocation";
 
 const Layout = ()=>{
   return (
@@ -38,10 +39,14 @@ const router = createBrowserRouter([
       {
         path:"/tips",
         element:<Tips/>
-      },
-      {
+      }
+      ,{
         path:"/destinations",
         element:<Destinations/>
+      },
+      {
+        path: "destinations/:id",
+        element: <SingleLocation/>,
       },
       {
         path:"/about",
